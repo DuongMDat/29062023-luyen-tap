@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Pagination } from 'antd';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export default function Home() {
     let nav =useNavigate()
+    let params = useParams()
     let [task, setTask] = useState([])
     const [pageInfo, setPageInfo] = useState({
         total: 9,
@@ -43,6 +44,9 @@ export default function Home() {
             {task.map(item => {
                 return <h5 key={item.id}>
                     Task {item.id}: {item?.attributes?.title}
+                    <button onClick={()=>{
+                        nav(`/detail/${params.id}`)
+                    }}>Chi tiet</button>
                 </h5>
             })}
             <button onClick={logOut}>

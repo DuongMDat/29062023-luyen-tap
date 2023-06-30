@@ -7,9 +7,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from './Components/Home.jsx';
-import Private from './Components/Private/PrivateRouter.jsx';
 import Login from './Components/Login.jsx';
 import PrivateRouter from './Components/Private/PrivateRouter.jsx';
+import Detail from './Components/Private/Details.jsx';
 const router = createBrowserRouter([{
   path: "/",
   element: <Login></Login>
@@ -21,7 +21,13 @@ const router = createBrowserRouter([{
       <Home></Home>
     </PrivateRouter>
   
-},
+},{
+  path:"/detail/:id",
+  element:
+  <PrivateRouter>
+    <Detail></Detail>
+  </PrivateRouter>
+}
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
