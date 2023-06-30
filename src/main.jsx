@@ -9,7 +9,7 @@ import {
 import Home from './Components/Home.jsx';
 import Login from './Components/Login.jsx';
 import PrivateRouter from './Components/Private/PrivateRouter.jsx';
-import Detail from './Components/Private/Details.jsx';
+import Detail from './Components/Details.jsx';
 const router = createBrowserRouter([{
   path: "/",
   element: <Login></Login>
@@ -22,7 +22,7 @@ const router = createBrowserRouter([{
     </PrivateRouter>
   
 },{
-  path:"/detail/:id",
+  path:"/:id",
   element:
   <PrivateRouter>
     <Detail></Detail>

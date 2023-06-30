@@ -21,6 +21,7 @@ export default function Detail() {
                 setDetail(response?.data?.data)
                 let txtData = JSON.stringify(response.data)
                 localStorage.getItem("user", txtData)
+
             })
             .catch((error) => {
                 console.log(error);
