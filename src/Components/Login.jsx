@@ -15,9 +15,7 @@ function onFinish(values) {
     };
     axios.request(config)
         .then((response) => {
-            // let txtData = JSON.stringify(response.data)
-            // localStorage.setItem('user', txtData)
-            // window.location.href = '/home';
+
             let txtData = JSON.stringify(response.data)
             localStorage.setItem('user', txtData)
             window.location.href = '/home';
