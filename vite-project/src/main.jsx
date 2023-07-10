@@ -12,6 +12,7 @@ import PrivateRouter from './Components/Private/PrivateRouter.jsx';
 import Detail from './Components/Details.jsx';
 import Add from './Components/Todo/Add.jsx';
 import Update from './Components/Todo/Update.jsx';
+import TodoList from './Components/Todo/Add.jsx';
 const router = createBrowserRouter([{
   path: "/",
   element: <Login></Login>
@@ -30,17 +31,18 @@ const router = createBrowserRouter([{
       <Detail></Detail>
     </PrivateRouter>
 },
-{
-  path: '/add',
-  element: <PrivateRouter>
-    <Add></Add>
-  </PrivateRouter>
-}, {
-  path: '/update',
-  element: <PrivateRouter>
-<Update></Update>
-  </PrivateRouter>
-}
+// {
+//   path: '/add',
+//   element: <PrivateRouter>
+//     <Add></Add>  
+//     </PrivateRouter>
+// }, 
+// {
+//   path: '/update',
+//   element: <PrivateRouter>
+//     <Update></Update>
+//   </PrivateRouter>
+// }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Pagination,Button } from 'antd';
+import { useEffect, useRef, useState } from "react";
+import { Pagination, Button } from 'antd';
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 export default function Home() {
@@ -31,33 +31,64 @@ export default function Home() {
         nav("/")
     }
 
+    const [todos, setTodos] = useState([]);
+    const todoInputRef = useRef(null);
+    let token = JSON.parse(localStorage.getItem('user'))
 
-    // function deleteTask(id){
-    // let token = JSON.parse(localStorage.getItem('user'))
+    const handleAdd = () => {
+        const taskText = todoInputRef.current.value;
+        if (taskText) {
+            // Check if the task already exists in the list
+            const existingTodo = todos.find((todo) => todo.title === taskText);
+            if (existingTodo) {
+                alert('Task already exists');
+                return;
+            }
 
-    //     let config = {
-    //         method: 'delete',
-    //         maxBodyLength: Infinity,
-    //         url: `https://backoffice.nodemy.vn/api/tasks/${id}`,
-    //         headers: {
-    //             'Authorization': `Bearer ${token.jwt}    ` ,
-    //             'Content-Type': 'application/json',
-    //         }
-    //     };
+            const newTask = {
+                title: taskText,
+                date: new Date().toISOString(),
+                complete: false,
+            };
+            const config = {
+                method: 'post',
+                url: 'https://backoffice.nodemy.vn/api/tasks',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+                data: JSON.stringify({ data: newTask }),
+            };
 
-    //     axios.request(config)
-    //         .then((response) => {
-    //             console.log(JSON.stringify(response.data));
-    //             // let txtData = JSON.stringify(response.data)
-    //             // localStorage.getItem('user', txtData)
-    //             // window.location.reload();
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }
+            axios.request(config)
+                .then((response) => {
+                    const { data } = response;
+                    // Thêm công việc mới vào danh sách
+                    setTodos([...todos, data]);
+                    // Xóa giá trị trong input
+                    todoInputRef.current.value = '';
+                    window.location.reload()
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
+
     return (
         <div>
+
+            <input type="text" ref={todoInputRef} />
+            <button onClick={handleAdd}>Thêm task</button>
+            {task.map(item => {
+                return <h5 key={item.id}>
+                    Task {item.id}: {item?.attributes?.title}
+                    <button onClick={() => {
+                        nav(`/${item.id}`)
+                    }}>Chi tiet</button>
+
+                </h5>
+            })}
             <Pagination simple defaultCurrent={1} total={pageInfo.total} page={pageInfo.page} pageSize={pageInfo.pageSize}
                 onChange={(trang, size) => {
                     setPageInfo({
@@ -67,23 +98,15 @@ export default function Home() {
                     })
                 }}
             />
-            {task.map(item => {
-                return <h5 key={item.id}>
-                    Task {item.id}: {item?.attributes?.title}
-                    <button onClick={() => {
-                        nav(`/${item.id}`)
-                    }}>Chi tiet</button>
-                    
-                </h5>
-            })}
             <button onClick={logOut}>
                 Đăng xuất
             </button>
-            <Button type="dashed" onClick={() => {
+            {/* <Button type="dashed" onClick={() => {
                 nav(`/add`)
-            }}>Thêm task</Button>
+            }}>Thêm task</Button> */}
+            
         </div>
-       
+
     )
 
 }
