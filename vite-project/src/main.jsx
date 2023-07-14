@@ -10,9 +10,12 @@ import Home from './Components/Home.jsx';
 import Login from './Components/Login.jsx';
 import PrivateRouter from './Components/Private/PrivateRouter.jsx';
 import Detail from './Components/Details.jsx';
-import Add from './Components/Todo/Add.jsx';
-import Update from './Components/Todo/Update.jsx';
-import TodoList from './Components/Todo/Add.jsx';
+import LocName from './Components/Todo/Header.jsx';
+import TaskSearch from './Components/Todo/Header.jsx';
+import Debounce from './Components/Todo/Header.jsx';
+import Loc from './Components/Todo/Debounce.jsx';
+
+// import Header from './Components/Todo/Header.jsx';
 const router = createBrowserRouter([{
   path: "/",
   element: <Login></Login>
@@ -30,18 +33,14 @@ const router = createBrowserRouter([{
     <PrivateRouter>
       <Detail></Detail>
     </PrivateRouter>
-},
+},{
+  path:"/loc",
+  element:<Loc></Loc>
+}
 // {
-//   path: '/add',
-//   element: <PrivateRouter>
-//     <Add></Add>  
-//     </PrivateRouter>
-// }, 
-// {
-//   path: '/update',
-//   element: <PrivateRouter>
-//     <Update></Update>
-//   </PrivateRouter>
+//   path: "/loc",
+//   element:
+//     <Debounce></Debounce>
 // }
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(

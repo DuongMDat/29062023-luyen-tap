@@ -4,7 +4,10 @@
   padding: 2rem;
   text-align: center;
 }
+.home{
 
+  background: slategrey;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

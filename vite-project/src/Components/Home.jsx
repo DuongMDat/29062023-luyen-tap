@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Pagination, Button } from 'antd';
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+
+
+
 export default function Home() {
     let nav = useNavigate()
     const params = useParams()
@@ -76,7 +79,7 @@ export default function Home() {
     };
 
     return (
-        <div>
+        <div className="homeza">
 
             <input type="text" ref={todoInputRef} />
             <button onClick={handleAdd}>Thêm task</button>
@@ -101,10 +104,7 @@ export default function Home() {
             <button onClick={logOut}>
                 Đăng xuất
             </button>
-            {/* <Button type="dashed" onClick={() => {
-                nav(`/add`)
-            }}>Thêm task</Button> */}
-            
+
         </div>
 
     )
